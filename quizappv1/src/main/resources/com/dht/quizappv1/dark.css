@@ -7,14 +7,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : admin
 */
 
-* {
-    -fx-font-family: "Verdana";
-}
-
 .Container {
     -fx-background-color: #121212;
     -fx-alignment: CENTER;
     -fx-spacing: 15;
+    -fx-padding: 10;
 }
 
 .Subject {
