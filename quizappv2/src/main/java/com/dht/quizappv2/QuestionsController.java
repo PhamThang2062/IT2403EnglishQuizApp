@@ -5,22 +5,27 @@
 package com.dht.quizappv2;
 
 import com.dht.pojo.Category;
+import com.dht.pojo.Level;
 import com.dht.pojo.Question;
 import com.dht.services.CategoryServices;
+import com.dht.services.LevelServices;
 import com.dht.services.QuestionServices;
 import java.net.URL;
 import java.sql.SQLException;
 
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -29,7 +34,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class QuestionsController implements Initializable {
     @FXML private ComboBox<Category> cbCates;
+    @FXML private ComboBox<Level> cbLevels;
     @FXML private TableView<Question> tvQuestions;
+    @FXML private VBox vChoices;
 
     /**
      * Initializes the controller class.
@@ -41,12 +48,14 @@ public class QuestionsController implements Initializable {
         this.loadColumns();
         
         CategoryServices s = new CategoryServices();
+        LevelServices lvlService = new LevelServices();
         QuestionServices questionService = new QuestionServices();
         try {
             this.cbCates.setItems(FXCollections.observableList(s.getCates()));
+            this.cbLevels.setItems(FXCollections.observableList(lvlService.getLevels()));
             this.tvQuestions.setItems(FXCollections.observableList(questionService.getQuestions(null)));
         } catch (SQLException ex) {
-            Logger.getLogger(QuestionsController.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(QuestionsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
     
@@ -61,6 +70,18 @@ public class QuestionsController implements Initializable {
         
         this.tvQuestions.getColumns().addAll(colId, colContent);
         
+    }
+    public void addChoices(){
+        HBox h=new HBox();
+        h.getStyleClass().add("Container");
+        
+        RadioButton rdo=new RadioButton();
+        TextField txt=new TextField();
+        txt.getStyleClass().add("input");
+        
+        h.getChildren().addAll(rdo,txt);
+        
+        this.vChoices.getChildren().add(h);
     }
     
 }

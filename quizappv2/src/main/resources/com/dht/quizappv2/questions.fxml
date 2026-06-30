@@ -14,7 +14,13 @@
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Subject" text="Quản lý câu hỏi" />
       <TextArea prefHeight="84.0" prefWidth="580.0" promptText="Nội dung câu hỏi" />
-      <VBox prefHeight="121.0" prefWidth="580.0">
+      <HBox styleClass="Container">
+         <children>
+            <ComboBox fx:id="cbCates" prefWidth="150.0" promptText="Danh mục" styleClass="Button" />
+            <ComboBox fx:id="cbLevels" prefWidth="150.0" styleClass="Button" />
+         </children>
+      </HBox>
+      <VBox fx:id="vChoices" prefHeight="121.0" prefWidth="580.0">
          <children>
             <HBox prefHeight="42.0" prefWidth="580.0" styleClass="Container">
                <children>
@@ -33,10 +39,9 @@
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="Container">
          <children>
             <Button mnemonicParsing="false" style="-fx-background-color: red;" styleClass="Button" text="Thêm câu hỏi" />
-            <Button mnemonicParsing="false" styleClass="Button" text="Thêm phương án" />
+            <Button mnemonicParsing="false" onAction="#addChoices" styleClass="Button" text="Thêm phương án" />
          </children>
       </HBox>
-      <ComboBox fx:id="cbCates" prefWidth="150.0" promptText="Danh mục" styleClass="Button" />
       <TableView fx:id="tvQuestions" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </VBox>

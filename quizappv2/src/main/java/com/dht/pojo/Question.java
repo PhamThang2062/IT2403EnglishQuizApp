@@ -4,6 +4,7 @@
  */
 package com.dht.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +20,51 @@ public class Question {
     private Category category;
     private List<Choice> choices;
 
+    private Question(QuestionBuilder b){
+        this.id=b.id;
+        this.content=b.content;
+        this.hint=b.hint;
+        this.image=b.image;
+        this.level=b.level;
+        this.category=b.category;
+        this.choices=b.choices;
+        
+    }
+    
+    
+    public static class QuestionBuilder{
+    private int id;
+    private String content;
+    private String hint;
+    private String image;
+    private Level level;
+    private Category category;
+    private List<Choice> choices;
+    
+    
+        public QuestionBuilder(){
+            this.choices=new ArrayList<>();
+        }
+        public QuestionBuilder setId(int id){
+            this.id=id;
+            return this;
+        }
+        public QuestionBuilder setContent(String content){
+            this.content=content;
+            return this;
+        }
+        public QuestionBuilder addChoices(Choice c){
+            this.choices.add(c);
+            return this;
+        }
+        
+        public Question build(){
+            return new Question(this);
+        }
+    }
+    
+    
+    
     /**
      * @return the id
      */

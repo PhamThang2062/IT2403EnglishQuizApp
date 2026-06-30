@@ -4,8 +4,7 @@
  */
 package com.dht.services;
 
-import com.dht.pojo.Category;
-import com.dht.pojo.Question;
+import com.dht.pojo.Level;
 import com.dht.utils.MyConnSingleton;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,21 +12,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**     
+/**
  *
  * @author admin
  */
-public class QuestionServices {
-    public List<Question> getQuestions(String kw) throws SQLException {
-        String sql = "SELECT * FROM question";
+public class LevelServices {
+    
+     public List<Level> getLevels() throws SQLException {
+        String sql = "SELECT * FROM level";
         PreparedStatement stm = MyConnSingleton.getInstance().connect().prepareCall(sql);
         ResultSet rs = stm.executeQuery();
         
-        List<Question> questions = new ArrayList<>();
+        List<Level> levels = new ArrayList<>();
         while (rs.next()) {
-           questions.add(new Question.QuestionBuilder().setContent(rs.getString("content")).setId(rs.getInt("id")).build());
+            levels.add(new Level(rs.getInt("id"), rs.getString("name")));
         }
         
-        return questions;
+        return levels;
     }
+    
+    
 }
